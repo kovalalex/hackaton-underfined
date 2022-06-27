@@ -1,6 +1,11 @@
 spring:
   profiles:
     active: dev
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    hibernate:
+      ddl-auto: update
 ---
 spring:
   datasource:
@@ -31,10 +36,6 @@ spring:
     minIdle: 2
     initialSize: 5
     removeAbandoned: true
-  jpa:
-    database: postgresql
-    hibernate:
-      ddl-auto: update
   config:
     activate:
       on-profile: prod

@@ -1,4 +1,4 @@
-package com.heroku.demo;
+package com.cbr.hackaton;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
