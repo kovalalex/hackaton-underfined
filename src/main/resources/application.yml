@@ -1,0 +1,42 @@
+spring:
+  profiles:
+    active: dev
+---
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/employee
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+    maxActive: 10
+    maxIdle: 5
+    minIdle: 2
+    initialSize: 5
+    removeAbandoned: true
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+  config:
+    activate:
+      on-profile: dev
+
+---
+spring:
+  datasource:
+    url: ${JDBC_DATABASE_URL}
+    driver-class-name: org.postgresql.Driver
+    maxActive: 10
+    maxIdle: 5
+    minIdle: 2
+    initialSize: 5
+    removeAbandoned: true
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+  config:
+    activate:
+      on-profile: prod
+
+
