@@ -1,4 +1,4 @@
-package com.cbr.hackaton;
+package com.cbr.hackaton.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

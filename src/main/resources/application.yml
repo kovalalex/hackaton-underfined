@@ -6,6 +6,9 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL10Dialect
     hibernate:
       ddl-auto: update
+  data:
+    rest:
+      detection-strategy: annotated
 ---
 spring:
   datasource:
