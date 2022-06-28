@@ -1,0 +1,9 @@
+type Record {
+    id: ID!
+    data: String
+}
+
+type Query {
+    todo: Boolean
+    getRecords: [Record]
+}
