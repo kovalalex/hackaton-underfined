@@ -9,6 +9,9 @@ spring:
   data:
     rest:
       detection-strategy: annotated
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 ---
 spring:
   datasource:
