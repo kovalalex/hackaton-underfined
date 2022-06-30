@@ -1,5 +1,7 @@
 package com.cbr.hackaton.config;
 
+import com.cbr.hackaton.auth.JwtFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -21,7 +24,10 @@ import javax.servlet.Filter;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
+
+    private final JwtFilter jwtFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -29,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
                 .addFilterBefore(corsFilter(), ChannelProcessingFilter.class)
                 .authorizeRequests()
 //                .antMatchers("/", "/add_user").permitAll()
+                .antMatchers("/api/libraries").authenticated()
                 .anyRequest()/*.authenticated()
                     .and()
                 .formLogin()
@@ -36,7 +43,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
                     .permitAll()
                     .and()
                 .logout()*/
-                .permitAll().and()
+                .permitAll()
+
+                .and()
+                .addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .cors().and().csrf().disable();
     }
 
