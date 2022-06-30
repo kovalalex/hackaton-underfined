@@ -21,6 +21,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.Filter;
 
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
+
 
 @Configuration
 @EnableWebSecurity
@@ -32,6 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .sessionManagement(sm -> sm.sessionCreationPolicy(STATELESS))
                 .addFilterBefore(corsFilter(), ChannelProcessingFilter.class)
                 .authorizeRequests()
 //                .antMatchers("/", "/add_user").permitAll()
