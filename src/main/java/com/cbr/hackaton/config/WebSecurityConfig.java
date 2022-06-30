@@ -34,6 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .httpBasic().disable()
                 .sessionManagement(sm -> sm.sessionCreationPolicy(STATELESS))
                 .addFilterBefore(corsFilter(), ChannelProcessingFilter.class)
                 .authorizeRequests()
